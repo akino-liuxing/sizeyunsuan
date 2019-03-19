@@ -1,0 +1,198 @@
+首先说明整数的四则运算，生成两个随机数并随机运算，在减法中比较大小防止出现负数，在除法中比较大小并循环取整除的随机数组合。最后输出算式并返回正确答案。
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+def newint():
+    opr = ['＋', '－', '×', '÷']
+    fh = random.randint(0, 3)
+    n1 = random.randint(1, 20)
+    n2 = random.randint(1, 20)
+    rjg = 0
+    if fh == 0:
+        rjg = n1 + n2
+    elif fh == 1:
+        n1, n2 = max(n1, n2), min(n1, n2)
+        rjg = n1 - n2
+    elif fh == 2:
+        rjg = n1 * n2
+    elif fh == 3:
+        n1, n2 = max(n1, n2), min(n1, n2)
+        while n1 % n2 != 0:
+            n1 = random.randint(1, 10)
+            n2 = random.randint(1, 10)
+            n1, n2 = max(n1, n2), min(n1, n2)
+        rjg = int(n1 / n2)
+    print(n1, opr[fh], n2, '= ', end='')
+    return rjg
+　　真分数四则运算类似。
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+def newfra():
+    opr = ['＋', '－', '×', '÷']
+    fh = random.randint(0, 3)
+    t1 = random.randint(1, 10)
+    t2 = random.randint(t1, 10)
+    n1 = Fraction(t1, t2)
+    t1 = random.randint(1, 10)
+    t2 = random.randint(t1, 10)
+    n2 = Fraction(t1, t2)
+    rjg = 0
+    if fh == 0:
+        rjg = n1 + n2
+    elif fh == 1:
+        n1, n2 = max(n1, n2), min(n1, n2)
+        rjg = n1 - n2
+    elif fh == 2:
+        rjg = n1 * n2
+    elif fh == 3:
+        n1, n2 = max(n1, n2), min(n1, n2)
+        rjg = n1 / n2
+    print(n1, opr[fh], n2, '= ', end='')
+    return rjg
+　　newtest()函数是要求用户输入一个整数来输出算式的数量，采用while循环随机生成整数或者真分数运算，将答案保存在rjg列表的同时输出算式直到算式数量达到要求。最后输出rjg列表即输出答案。
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+def newtest():
+    opr = ['＋', '－', '×', '÷']
+    print('输入题库所需要的题目数量')
+    n=int(input())
+    rjg=[]
+    m=0
+    while m<=(n-1):
+        fh = random.randint(0, 4)
+        if fh==0:
+            print(m+1,end='、')
+            rjg.append(newfra())
+            print(' ')
+        else:
+            print(m+1,end='、')
+            rjg.append(newint())
+            print(' ')
+        m=m+1
+    m=0
+    print('答案：')
+    while m<=(n-1):
+        print(m+1,'、',rjg[m])
+        m=m+1
+　　下列为主函数，第一个模式负责调用上述newint()、new函数，并获得函数返回值即算式答案，与用户输入值进行比较。第二个模式则是生成算式题目。
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+print('1、四则运算')
+print('2、制作题库')
+n=int(input())
+if n==1:
+    print('input "0000" to Quit')
+    while True:
+        fh = random.randint(0, 4)
+        if fh == 0:
+            rjg = newfra()
+            jg = input()
+            if jg == '0000':
+                break;
+            sr = Fraction(jg)
+            if sr == rjg:
+                print('right')
+            else:
+                print('error. the Tight answer is', rjg)
+        else:
+            rjg = newint()
+            jg = input()
+            if jg == '0000':
+                break;
+            sr = int(jg)
+            if sr == rjg:
+                print('right')
+            else:
+                print('error. the Tight answer is', rjg)
+if n==2:
+    newtest()
