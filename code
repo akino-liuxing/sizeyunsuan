@@ -1,5 +1,7 @@
+from fractions import Fraction
+
 def newint():
-    opr = ['＋', '－', '×', '÷']
+    opr = ['+', '-', '×', '÷']
     fh = random.randint(0, 3)
     n1 = random.randint(1, 20)
     n2 = random.randint(1, 20)
@@ -22,7 +24,7 @@ def newint():
     return rjg
     
 def newfra():
-    opr = ['＋', '－', '×', '÷']
+    opr = ['+', '-', '×', '÷']
     fh = random.randint(0, 3)
     t1 = random.randint(1, 10)
     t2 = random.randint(t1, 10)
@@ -43,10 +45,9 @@ def newfra():
         rjg = n1 / n2
     print(n1, opr[fh], n2, '= ', end='')
     return rjg
-　　newtest()
   
 def newtest():
-    opr = ['＋', '－', '×', '÷']
+    opr = ['+', '-', '×', '÷']
     print('输入题库所需要的题目数量')
     n=int(input())
     rjg=[]
